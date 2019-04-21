@@ -1,0 +1,2 @@
+# rich-domain
+Rich domain
