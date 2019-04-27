@@ -70,6 +70,10 @@ namespace PaymentContext.Domain.Handlers
             // Aplicar as validações
             AddNotifications(name, document, email, address, student, subscription, payment);
 
+            // Checar as notificações
+            if(Invalid)
+                return new CommandResult(false, "Não foi possível realizar sua assinatura");
+
             // Salvar as informações
             _repository.CreateSubscription(student);
 
@@ -82,7 +86,7 @@ namespace PaymentContext.Domain.Handlers
 
         public ICommandResult Handle(CreatePayPalSubscriptionCommand command)
         {
-                        // Fail fast valdiation
+            // Fail fast valdiation
             command.Valdiate();
             if(command.Invalid){
                 AddNotifications(command);
@@ -124,6 +128,10 @@ namespace PaymentContext.Domain.Handlers
 
             // Aplicar as validações
             AddNotifications(name, document, email, address, student, subscription, payment);
+
+            // Checar as notificações
+            if(Invalid)
+                return new CommandResult(false, "Não foi possível realizar sua assinatura");
 
             // Salvar as informações
             _repository.CreateSubscription(student);
